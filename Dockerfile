@@ -21,26 +21,26 @@ ENV QEMU_VERSION=v4.2.0-6 \
 RUN apk update && apk add ca-certificates outils-sha1 && \
     \
     # Download qemu static for our architecture
-    wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/qemu-${QEMU_ARCHITECTURE}-static.tar.gz -O - | tar -xz && \
+    wget https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-6/qemu-aarch64-static.tar.gz -O - | tar -xz && \
     \
     # Download wekan and shasum
-    wget https://releases.wekan.team/raspi3/wekan-${WEKAN_VERSION}-${WEKAN_ARCHITECTURE}.zip && \
+    wget https://releases.wekan.team/raspi3/wekan-latest-arm64.zip && \
     wget https://releases.wekan.team/raspi3/SHA256SUMS.txt && \
     # Verify wekan
-    grep wekan-${WEKAN_VERSION}-${WEKAN_ARCHITECTURE}.zip SHA256SUMS.txt | sha256sum -c - && \
+    grep wekan-latest-arm64.zip SHA256SUMS.txt | sha256sum -c - && \
     \
     # Unzip wekan
-    unzip wekan-${WEKAN_VERSION}-${WEKAN_ARCHITECTURE}.zip && \
+    unzip wekan-latest-arm64.zip && \
     \
     # Download node and shasums
-    wget https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-${NODE_ARCHITECTURE}.tar.gz && \
-    wget https://nodejs.org/dist/${NODE_VERSION}/SHASUMS256.txt.asc && \
+    wget https://nodejs.org/dist/v14.20.1/node-v14.20.1-linux-arm64.tar.gz && \
+    wget https://nodejs.org/dist/v14.20.1/SHASUMS256.txt.asc && \
     \
     # Verify nodejs authenticity
-    grep node-${NODE_VERSION}-${NODE_ARCHITECTURE}.tar.gz SHASUMS256.txt.asc | sha256sum -c - && \
+    grep node-v14.20.1-linux-arm64.tar.gz SHASUMS256.txt.asc | sha256sum -c - && \
     \
     # Extract node and remove tar.gz
-    tar xvzf node-${NODE_VERSION}-${NODE_ARCHITECTURE}.tar.gz
+    tar xvzf node-v14.20.1-linux-arm64.tar.gz
 
 # Build wekan dockerfile
 FROM arm64v8/ubuntu:19.10
@@ -55,16 +55,16 @@ ENV QEMU_ARCHITECTURE=aarch64 \
     WITH_API=true \
     PORT=8080 \
     ROOT_URL=http://localhost \
-    MONGO_URL=mongodb://127.0.0.1:27017/wekan
+    MONGO_URL=mongodb://wekandb:27017/wekan
 
 # Copy qemu-static to image
-COPY --from=builder qemu-${QEMU_ARCHITECTURE}-static /usr/bin
+COPY --from=builder qemu-aarch64-static /usr/bin
 
 # Copy the app to the image
 COPY --from=builder bundle /home/wekan/bundle
 
 # Copy
-COPY --from=builder node-${NODE_VERSION}-${NODE_ARCHITECTURE} /opt/nodejs
+COPY --from=builder node-v14.20.1-linux-arm64 /opt/nodejs
 
 RUN \
     set -o xtrace && \
@@ -78,9 +78,9 @@ RUN \
     chown wekan --recursive /home/wekan/.config && \
     \
     # Install Node dependencies
-    npm install -g npm@${NPM_VERSION}
+    npm install -g npm@latest
 
-EXPOSE $PORT
+EXPOSE 8080
 USER wekan
 
 #---------------------------------------------------------------------
