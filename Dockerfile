@@ -25,16 +25,16 @@ RUN apk update && apk add ca-certificates outils-sha1 && \
     \
     # Download wekan and shasum
     wget https://releases.wekan.team/raspi3/wekan-latest-arm64.zip && \
-    wget https://releases.wekan.team/raspi3/SHA256SUMS.txt && \
+#    wget https://releases.wekan.team/raspi3/SHA256SUMS.txt && \
     # Verify wekan
-    grep wekan-latest-arm64.zip SHA256SUMS.txt | sha256sum -c - && \
+#    grep wekan-latest-arm64.zip SHA256SUMS.txt | sha256sum -c - && \
     \
     # Unzip wekan
     unzip wekan-latest-arm64.zip && \
     \
     # Download node and shasums
     wget https://nodejs.org/dist/v14.20.1/node-v14.20.1-linux-arm64.tar.gz && \
-    wget https://nodejs.org/dist/v14.20.1/SHASUMS256.txt.asc && \
+#    wget https://nodejs.org/dist/v14.20.1/SHASUMS256.txt.asc && \
     \
     # Verify nodejs authenticity
 #    grep node-v14.20.1-linux-arm64.tar.gz SHASUMS256.txt.asc | sha256sum -c - && \
