@@ -67,7 +67,7 @@ COPY --from=builder bundle /home/wekan/bundle
 COPY --from=builder node-v14.20.1-linux-arm64 /opt/nodejs
 
 RUN \
-    apt update && apt upgrade -y && apt install libc6 -y && \
+    apt update && apt upgrade -y && \
     set -o xtrace && \
     # Add non-root user wekan
     useradd --user-group --system --home-dir /home/wekan wekan && \
@@ -77,6 +77,8 @@ RUN \
     ln -s /opt/nodejs/bin/npm /usr/bin/npm && \
     mkdir -p /opt/nodejs/lib/node_modules/fibers/.node-gyp /root/.node-gyp/8.16.1 /home/wekan/.config && \
     chown wekan --recursive /home/wekan/.config && \
+    mkdir /data && \
+    chown wekan --recursive /data && \
     \
     # Install Node dependencies
     npm install -g npm@latest
