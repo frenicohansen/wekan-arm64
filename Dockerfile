@@ -43,7 +43,7 @@ RUN apk update && apk add ca-certificates outils-sha1 && \
     tar xvzf node-v14.20.1-linux-arm64.tar.gz
 
 # Build wekan dockerfile
-FROM arm64v8/ubuntu:20.04
+FROM arm64v8/ubuntu:22.04
 LABEL maintainer="wekan"
 
 # Set the environment variables (defaults where required)
