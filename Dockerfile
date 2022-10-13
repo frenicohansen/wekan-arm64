@@ -20,6 +20,10 @@ ENV QEMU_VERSION=v4.2.0-6 \
     # Install dependencies
 RUN apk update && apk add ca-certificates outils-sha1 && \
     \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-2.35-r0.apk && \
+    apk add glibc-2.35-r0.apk
+    \
     # Download qemu static for our architecture
     wget https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-6/qemu-aarch64-static.tar.gz -O - | tar -xz && \
     \
@@ -54,7 +58,7 @@ ENV QEMU_ARCHITECTURE=aarch64 \
     NPM_VERSION=latest \
     WITH_API=true \
     PORT=8080 \
-    ROOT_URL=http://localhost \
+    ROOT_URL=https://board.tob.one \
     MONGO_URL=mongodb://wekandb:27017/wekan
 
 # Copy qemu-static to image
