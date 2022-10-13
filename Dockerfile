@@ -18,7 +18,7 @@ ENV QEMU_VERSION=v4.2.0-6 \
 #---------------------------------------------------------------------
 
     # Install dependencies
-RUN apk update && apk add ca-certificates outils-sha1 gcompat && \
+RUN apk update && apk add ca-certificates outils-sha1 && \
     \
     # Download qemu static for our architecture
     wget https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-6/qemu-aarch64-static.tar.gz -O - | tar -xz && \
@@ -67,6 +67,7 @@ COPY --from=builder bundle /home/wekan/bundle
 COPY --from=builder node-v14.20.1-linux-arm64 /opt/nodejs
 
 RUN \
+    apt update && apt upgrade -y && apt install libc6 -y && \
     set -o xtrace && \
     # Add non-root user wekan
     useradd --user-group --system --home-dir /home/wekan wekan && \
