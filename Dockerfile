@@ -77,7 +77,7 @@ RUN \
     ln -s /opt/nodejs/bin/npm /usr/bin/npm && \
     mkdir -p /opt/nodejs/lib/node_modules/fibers/.node-gyp /root/.node-gyp/8.16.1 /home/wekan/.config && \
     chown wekan --recursive /home/wekan/.config && \
-    mkdir -p /data/attachments && \
+    mkdir -p /data && \
     chown wekan --recursive /data && \
     \
     # Install Node dependencies
