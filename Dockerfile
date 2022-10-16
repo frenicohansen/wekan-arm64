@@ -54,8 +54,8 @@ ENV QEMU_ARCHITECTURE=aarch64 \
     NPM_VERSION=latest \
     WITH_API=true \
     PORT=8080 \
-    ROOT_URL=https://board.tob.one \
-    MONGO_URL=mongodb://wekandb:27017/wekan
+    ROOT_URL=http://localhost \
+    MONGO_URL=mongodb://127.0.0.1:27017/wekan
 
 # Copy qemu-static to image
 COPY --from=builder qemu-aarch64-static /usr/bin
