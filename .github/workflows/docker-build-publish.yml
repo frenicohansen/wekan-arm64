@@ -1,7 +1,7 @@
 name: docker-build-publish
 on: [push]
 jobs:
-  publish-mattermost-arm64:
+  publish-wekan-arm64:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout the code  
