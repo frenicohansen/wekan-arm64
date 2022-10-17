@@ -30,7 +30,7 @@ RUN apk update && apk add ca-certificates outils-sha1 && \
 #    grep wekan-latest-arm64.zip SHA256SUMS.txt | sha256sum -c - && \
     \
     # Unzip wekan
-    unzip wekan-latest-arm64.zip && \
+    unzip -q wekan-latest-arm64.zip && \
     \
     # Download node and shasums
     wget https://nodejs.org/dist/v14.20.1/node-v14.20.1-linux-arm64.tar.gz && \
