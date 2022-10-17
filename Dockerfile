@@ -24,7 +24,7 @@ RUN apk update && apk add ca-certificates outils-sha1 && \
     wget https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-6/qemu-aarch64-static.tar.gz -O - | tar -xz && \
     \
     # Download wekan and shasum
-    wget https://releases.wekan.team/raspi3/wekan-latest-arm64.zip && \
+    wget https://github.com/frenicohansen/wekan/releases/download/v6.53.1/wekan-6.53.1-arm64.zip -O wekan-latest-arm64.zip && \
 #    wget https://releases.wekan.team/raspi3/SHA256SUMS.txt && \
     # Verify wekan
 #    grep wekan-latest-arm64.zip SHA256SUMS.txt | sha256sum -c - && \
